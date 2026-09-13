@@ -10,7 +10,7 @@
   "use strict";
 
   var WASM_PRIMARY = "https://3rb.io/js/dist/b3be84e65f826197470c.module.wasm";
-  var WASM_FALLBACK = "https://raw.githubusercontent.com/thedarkness042/3rbup/main/b3be84e65f826197470c.module.wasm";
+  var WASM_FALLBACK = "https://raw.githubusercontent.com/freedragbydarkness/darkext/main/b3be84e65f826197470c.module.wasm";
 
   
   var T = new TextDecoder("utf-8", { ignoreBOM: true, fatal: true });
