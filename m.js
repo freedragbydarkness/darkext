@@ -5144,6 +5144,12 @@
           }
           return true;
         }
+        if (inner && inner.length && 123 === inner[0]) {
+          try {
+            JSON.parse(new TextDecoder().decode(inner));
+          } catch (e) {}
+          return true;
+        }
         if (inner && inner.length) {
           const dv = new DataView(inner.buffer, inner.byteOffset, inner.byteLength);
           PacketParser.parse(dv, slot);
@@ -5465,8 +5471,17 @@
       if (3 !== nq) Notifications.alert("Drag+", "Tab " + nq + " connected");
     }
     static ["onMessage"](alh, adu) {
-      this.packetCount["in"]++;
-      
+this.packetCount["in"]++;
+      if ("string" === typeof alh.data) {
+        try {
+          const o = JSON.parse(alh.data);
+          if (o && "ban_ui" === o.type) {
+            console.log("[Drag+] ban_ui received");
+          }
+        } catch (e) {}
+        return;
+      }
+
       if (this.shieldHandleFrame(alh, adu)) {
         return;
       }
